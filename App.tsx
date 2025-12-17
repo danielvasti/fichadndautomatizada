@@ -889,6 +889,26 @@ export default function App() {
                     />
                     <div className={`text-center text-[10px] font-bold uppercase border-t ${theme.borderLight} mt-2 pt-1`}>Outras Proficiências e Idiomas</div>
                 </div>
+
+                <div className={`border-2 ${theme.border} rounded-lg p-2 flex flex-col min-h-[12rem]`}>
+                    <textarea 
+                        className={`w-full text-sm bg-transparent resize-none outline-none p-1 overflow-hidden ${theme.input}`}
+                        value={profile.additionalFeatures}
+                        rows={6}
+                        onChange={e => {
+                            setProfile({...profile, additionalFeatures: e.target.value});
+                            e.target.style.height = 'auto';
+                            e.target.style.height = e.target.scrollHeight + 'px';
+                        }}
+                        ref={el => {
+                             if (el) {
+                                 el.style.height = 'auto';
+                                 el.style.height = el.scrollHeight + 'px';
+                             }
+                        }}
+                    />
+                    <div className={`text-center text-[10px] font-bold uppercase border-t ${theme.borderLight} mt-2 pt-1`}>Outras Características e Habilidades</div>
+                </div>
             </div>
             </div>
         </>
@@ -960,15 +980,7 @@ export default function App() {
                              </div>
                         </div>
 
-                        <div className={`border-2 ${theme.border} rounded-lg p-2 flex flex-col h-64`}>
-                             <textarea 
-                                className={`w-full flex-grow text-sm bg-transparent resize-none outline-none p-1 ${theme.input}`}
-                                value={profile.additionalFeatures}
-                                onChange={e => setProfile({...profile, additionalFeatures: e.target.value})}
-                                placeholder="Outras características e habilidades..."
-                             />
-                             <div className={`text-center text-[10px] font-bold uppercase border-t ${theme.borderLight} mt-2 pt-1`}>Outras Características e Habilidades</div>
-                        </div>
+                        {/* Additional Features Moved to Main Tab */}
 
                         <div className={`border-2 ${theme.border} rounded-lg p-2 flex flex-col flex-grow`}>
                              <textarea 
