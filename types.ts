@@ -53,6 +53,7 @@ export interface SaveState {
 export interface CharacterStats {
   attributes: Record<Attribute, number>;
   proficiencyBonus: string; // String to allow flexible input, parsed as int for calcs
+  inspiration: boolean; // Reverted to boolean (checkbox)
   
   savingThrows: Record<Attribute, SaveState>;
   skills: Record<string, SkillState>;

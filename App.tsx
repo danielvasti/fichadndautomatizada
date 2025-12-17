@@ -111,6 +111,7 @@ export default function App() {
       [Attribute.CHA]: 10,
     },
     proficiencyBonus: '2',
+    inspiration: false, // Initialize inspiration as boolean
     savingThrows: {
       [Attribute.STR]: { proficient: false, override: '' },
       [Attribute.DEX]: { proficient: false, override: '' },
@@ -480,10 +481,20 @@ export default function App() {
             <header className={`mb-6 border-b-2 ${theme.accent} pb-4`}>
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
                 <div className={`w-full md:w-1/3 border-b ${theme.borderLight} pb-1`}>
-                <input 
-                    className={`text-3xl font-header font-bold w-full outline-none uppercase bg-transparent ${theme.input}`}
+                {/* 
+                   Name Field converted to Textarea for auto-expand.
+                   resize-none prevents manual dragging which might break layout, 
+                   but height auto adjustment in onChange makes it grow.
+                */}
+                <textarea 
+                    className={`text-3xl font-header font-bold w-full outline-none uppercase bg-transparent overflow-hidden resize-none ${theme.input}`}
                     value={profile.name}
-                    onChange={e => setProfile({...profile, name: e.target.value})}
+                    rows={1}
+                    onChange={e => {
+                        setProfile({...profile, name: e.target.value});
+                        e.target.style.height = 'auto';
+                        e.target.style.height = e.target.scrollHeight + 'px';
+                    }}
                     placeholder="Nome do Personagem"
                 />
                 <label className={`text-[10px] uppercase ${theme.subText} font-bold tracking-wider`}>Nome do Personagem</label>
@@ -533,9 +544,14 @@ export default function App() {
                 {/* Inspiration & PB */}
                 <div className="flex flex-col gap-2">
                     <div className={`flex items-center border-2 ${theme.border} rounded-lg p-2`}>
-                        <span className="font-bold text-xl mr-3">
-                            <input type="checkbox" className={`w-6 h-6 accent-red-700 ${theme.border}`} />
-                        </span>
+                        <div className="font-bold text-xl mr-3 w-8 text-center flex items-center justify-center">
+                            <input 
+                                type="checkbox"
+                                className={`w-6 h-6 accent-red-700 ${theme.border}`}
+                                checked={stats.inspiration as boolean}
+                                onChange={e => setStats({...stats, inspiration: e.target.checked})}
+                            />
+                        </div>
                         <span className="text-xs font-bold uppercase">Inspiração</span>
                     </div>
                     <div className={`flex items-center border-2 ${theme.border} rounded-lg p-2`}>
